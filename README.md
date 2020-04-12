@@ -2,6 +2,8 @@
 
 Compress Images with large file size without loosing quality.
 
+> This script was made in 2 hours and contains only the functionality that I needed. If you need more features, please create an Issue and I will consider implementing it. PR's are also accepted.
+
 ## Usage
 
 - Run `npm i` to install dependencies.
