@@ -4,8 +4,17 @@ const path = require("path");
 
 const FILES_TO_IGNORE = [".DS_Store", ".gitkeep"];
 
-function getSizeInMb(bytes) {
-  return (bytes / 1024 / 1024).toFixed(2).toString().padStart(6, " ");
+function bytesToSize(bytes) {
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+
+  if (bytes == 0) return "0 Byte";
+
+  const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+
+  return (Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i]).padStart(
+    10,
+    " "
+  );
 }
 
 async function init() {
@@ -31,9 +40,9 @@ async function init() {
       totalBytesSaved += stats.size - compressedStats.size;
 
       console.log(
-        `Before: ${getSizeInMb(stats.size)} MB   After: ${getSizeInMb(
+        `Before: ${bytesToSize(stats.size)}   After: ${bytesToSize(
           compressedStats.size
-        )} MB   Total Saved: ${getSizeInMb(totalBytesSaved)} MB`
+        )}   Total Saved: ${bytesToSize(totalBytesSaved)}`
       );
     } catch (e) {
       console.log(image);
